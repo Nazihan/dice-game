@@ -1,3 +1,5 @@
+// Togloom dussan esehig hadgalah tolvin huvisagch  
+var isNewGame;
 // Toglogchin eeljig hadgalah huvisagch, 1 toglogchig 0, 2 dugar ig 1 gej temdegli
 var activePlayer = 0;
 
@@ -19,6 +21,8 @@ initGame();
 
 // Shineer ehlehed beltgeh
 function initGame(){
+    // Togloom ehelle gdg tolovt oruuln
+    isNewGame = true;
 
     activePlayer = 0;
     
@@ -54,6 +58,8 @@ function initGame(){
 // Shoog shideh eventListener
 window.document.querySelector('.btn-roll').addEventListener('click', function () {
 
+    if(isNewGame === true){
+
     // 1 -6 hurtelh sanmsargui 1 toog gargaj awna
     var diceNumber = Math.floor(Math.random() * 6) + 1;
 
@@ -73,10 +79,19 @@ window.document.querySelector('.btn-roll').addEventListener('click', function ()
         switchToNextPlayer();
 
     }
+
+    }else{
+        alert('Game over !!! Go new game bro :D');
+    }
+
+
+   
 });
 // Hold towchni eventListener 
 document.querySelector('.btn-hold').addEventListener('click', function () {
-    // Ug toglogchin tsuglulsan eeljni onog global ono dr n nemj ogno
+    
+    if(isNewGame){
+        // Ug toglogchin tsuglulsan eeljni onog global ono dr n nemj ogno
     scores[activePlayer] = scores[activePlayer] + roundScore;
 
     // Delgetsen drh onog oorcilno
@@ -84,6 +99,8 @@ document.querySelector('.btn-hold').addEventListener('click', function () {
 
     // Toglogch hojson esehig shalgana (onoo 100+) 
     if (scores[activePlayer] >= 10) {
+        // Togloomiig dussan tolovt oruuln 
+        isNewGame = false;
         // Ylagch gsen textig nerni orond garganae
         document.getElementById('name-' + activePlayer).textContent = 'WINNER !!!';
         document.querySelector('.player-' + activePlayer + '-panel').classList.add("winner");
@@ -92,6 +109,10 @@ document.querySelector('.btn-hold').addEventListener('click', function () {
         //Toglogchin eeljig solino
         switchToNextPlayer();
     }
+    }else{
+        alert('Game over !!! Go new game bro :D');
+    }
+
 });
 
 // En func n togloh eeljig daragin toglogch ru shiljulne
