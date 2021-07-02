@@ -10,15 +10,46 @@ var roundScore = 0;
 //Shooni ali talaara buusnig hadgalah huvisagch heregtei, 1 - 6 gsen utgiig ene huvisagchind sanamsargvui ger uusgej ogno
 var diceNumber = Math.floor(Math.random() * 6) + 1;
 
-// Program ehlehed beltgii
-
-window.document.getElementById('current-0').textContent = "0";
-window.document.getElementById('current-1').textContent = "0";
-window.document.getElementById('score-0').textContent = "0";
-window.document.getElementById('score-1').textContent = "0";
+// Shooni zurgiig uzuulekh element domos haih
 
 var diceDom = window.document.querySelector('.dice');
-diceDom.style.display = "none ";
+
+// Togloomig ehluulne
+initGame();
+
+// Shineer ehlehed beltgeh
+function initGame(){
+
+    activePlayer = 0;
+    
+    //Toglogchin tsugluulsan onoog hadgalah 
+    scores = [0, 0];
+    
+    //Toglochin eeljinde tsugluulj bga onoog hadgalah huvisagch
+    roundScore = 0;
+    
+    // Program ehlehed beltgii
+    
+    window.document.getElementById('current-0').textContent = "0";
+    window.document.getElementById('current-1').textContent = "0";
+    window.document.getElementById('score-0').textContent = "0";
+    window.document.getElementById('score-1').textContent = "0";
+
+    // Toglogchdin nerig butsaj gargah
+    document.getElementById('name-0').textContent = 'Payer 1';
+    document.getElementById('name-1').textContent = 'Payer 2';
+
+    document.querySelector('.player-0-panel').classList.remove('winner');
+    document.querySelector('.player-1-panel').classList.remove('winner');
+
+    document.querySelector('.player-0-panel').classList.remove('active');
+    document.querySelector('.player-1-panel').classList.remove('active');
+
+    document.querySelector('.player-0-panel').classList.add('active');
+    
+    diceDom.style.display = "none ";
+    
+    }
 
 // Shoog shideh eventListener
 window.document.querySelector('.btn-roll').addEventListener('click', function () {
@@ -43,7 +74,6 @@ window.document.querySelector('.btn-roll').addEventListener('click', function ()
 
     }
 });
-
 // Hold towchni eventListener 
 document.querySelector('.btn-hold').addEventListener('click', function () {
     // Ug toglogchin tsuglulsan eeljni onog global ono dr n nemj ogno
@@ -53,18 +83,15 @@ document.querySelector('.btn-hold').addEventListener('click', function () {
     document.getElementById('score-' + activePlayer).textContent = scores[activePlayer];
 
     // Toglogch hojson esehig shalgana (onoo 100+) 
-    if (scores[activePlayer] >= 100) {
+    if (scores[activePlayer] >= 10) {
         // Ylagch gsen textig nerni orond garganae
         document.getElementById('name-' + activePlayer).textContent = 'WINNER !!!';
         document.querySelector('.player-' + activePlayer + '-panel').classList.add("winner");
         document.querySelector('.player-' + activePlayer + '-panel').classList.remove("active");
     } else {
         //Toglogchin eeljig solino
-
         switchToNextPlayer();
     }
-
-
 });
 
 // En func n togloh eeljig daragin toglogch ru shiljulne
@@ -74,7 +101,6 @@ function switchToNextPlayer() {
     document.getElementById('current-' + activePlayer).textContent = 0;
 
     // toglogchin eeljing ngo toglogchru shiljuln
-
     activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
 
     // Ulaan tsegiig shiljuuln
@@ -86,10 +112,19 @@ function switchToNextPlayer() {
 }
 
 // Shine togloom ehluuleh
+document.querySelector('.btn-new').addEventListener('click', initGame);
 
-document.querySelector('.btn-new').addEventListener('click' function () {
-    alert
-})
+
+
+
+
+
+
+
+
+
+
+
 
  // if (activePlayer === 0) {
         //     activePlayer = 1;
